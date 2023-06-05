@@ -1,57 +1,20 @@
 Ocean Basalts
 ==============================
 
-Analyzing Ocean Basalt Chemistry using Data Science and Machine Learning
+# Basalt's Chemistry Analylis to Determined Tectonic Setting using Machine Learning Algorithms
+<center><img width="584" alt="Screenshot 2023-05-11 at 12 48 47 AM" src="https://github.com/CCNY-Earthchem-Projects/OceanBasaltML/assets/59939691/120b7c97-3245-4172-ad67-c2e9190e7b54"></center>
 
-Project Organization
-------------
+This is a porject being conducted by Jenifer Vivar, the Geology department of the city college of New York, the computer science department of the City College of New York, as part of the thesis project for my graduate studies.
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
-    ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
-    │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
-    │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
-    │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
-    │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
-    │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
-    ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
-    │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
-    │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
-    │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
-    │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
-    │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+The project uses data obtained from the EartChem website. The data is mantained by different colleges and is sponsored by the Natural Science Foundation. The data can be found here: https//www.earthchem.org/data-access/
 
 
---------
+The first part of the project consited of using Logistic Regression and Random Forest algorithms to explore what each model determined to be the most "important" features for classification. The techniques used to reduce bias on the feature selection were recursive feature elimination RFE and a permutation algorithm.
 
-<p><small>Project based on the <a target="_blank" href="https://drivendata.github.io/cookiecutter-data-science/">cookiecutter data science project template</a>. #cookiecutterdatascience</small></p>
+
+![perm_rfe_models](https://github.com/CCNY-Earthchem-Projects/OceanBasaltML/assets/59939691/28fa7ad8-5aca-452a-b038-0864b7e6957c)
+
+
+The second part of the project focused on determining a way to detect mislabeled data. This was approached by determining outliers in the data. There are many algorithms that can be use for this purpose, and they all have their strength and weakneses. The idea here was to `diversify` an ensemble method by combining their approaches via majority voting. The ensemble works as follows: First all algorithms determined what they believe to be outliers, then voting is done and the features with the major votes are selected, then dummy_y values are created assigning one to suspected outliers and 0 to all other values, finally, the dummy y values are passed to a function that will determined if is probable that the sample is an outlier.
+
+<img width="897" alt="Screenshot 2023-05-11 at 1 29 06 AM" src="https://github.com/CCNY-Earthchem-Projects/OceanBasaltML/assets/59939691/099aabe6-edb0-4205-b11a-18a62723b41d">
